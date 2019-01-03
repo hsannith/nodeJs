@@ -14,11 +14,25 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
  
+  //u can also do
+  /*  
+  //this is magical method created by sequilze because
+  0f "has many" realtion defined in app.js
+
+  req.user.createProduct({
+     title:title,
+    price:price,
+    imageUrl:imageUrl,
+    description:description,
+  })
+  
+  */
   Product.create({
     title:title,
     price:price,
     imageUrl:imageUrl,
-    description:description
+    description:description,
+    userId:req.user.id
   }).then(
    result=>{
   //console.log(result);
@@ -116,7 +130,8 @@ exports.posteditproduct=(req,res,next)=>{
 
 exports.getProducts = (req, res, next) => {
 
-  Product.findAll()
+  //Product.findAll()
+  req.user.getProducts()
   .then(
     products=>{
       res.render('admin/products', {
