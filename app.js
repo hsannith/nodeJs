@@ -47,7 +47,7 @@ User.hasOne(Cart);
 Cart.belongsToMany(Product,{ through: CartItem});
 Product.belongsToMany(Cart,{ through:CartItem});
 
-sequelize.sync({force:true}).then(
+sequelize.sync().then(
     result=>{
        // console.log(result);
         
@@ -64,6 +64,12 @@ sequelize.sync({force:true}).then(
 )
 .then(
     user=>{
+        return user.createCart();
+        
+    }
+)
+.then(
+    cart=>{
         app.listen(3000);
     }
 )
