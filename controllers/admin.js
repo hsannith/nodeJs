@@ -14,6 +14,7 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
  
+  const product=new Product(title,price,description,imageUrl);
   //u can also do
   /*  
   //this is magical method created by sequilze because
@@ -27,13 +28,8 @@ exports.postAddProduct = (req, res, next) => {
   })
   
   */
-  Product.create({
-    title:title,
-    price:price,
-    imageUrl:imageUrl,
-    description:description,
-    userId:req.user.id
-  }).then(
+ product.save()
+  .then(
    result=>{
   //console.log(result);
    res.redirect('/admin/products');

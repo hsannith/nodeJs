@@ -1,10 +1,9 @@
 const Product = require('../models/product');
-const Cart = require('../models/cart');
-const Order=require('../models/order');
+
 
 exports.getProducts = (req, res, next) => {
 
-  Product.findAll().
+  Product.fetchall().
   then(
     products=>{
     res.render('shop/product-list', {
@@ -55,7 +54,7 @@ exports.getProduct = (req, res, next) => {
 
 exports.getIndex = (req, res, next) => {
 
-  Product.findAll()
+  Product.fetchall()
   .then(
     products=>{
       res.render('shop/index', {
